@@ -2,7 +2,7 @@
 
 This project focuses on data manipulation and visualization using Python's core data science libraries.
 
-## 📖 Project Overview
+## Project Overview
 **Being Familiar with Numpy, Pandas, and Matplotlib**
 
 I created a data analysis application that simulates analyzing university course performance data. The workflow includes:
@@ -11,11 +11,11 @@ I created a data analysis application that simulates analyzing university course
 3. **Calculation:** Performing numerical calculations with **NumPy**.
 4. **Visualization:** Creating various visualizations (charts/graphs) using **Matplotlib** to interpret the data.
 
-## 🔗 Assignment Description
+## Assignment Description
 You can view the original full assignment description and requirements provided by the professor here:
 > [**View Original Problem Statement (GitHub)**](https://github.com/hhomaei/aml/blob/main/Chapter-2-Required-Pytohn-Libs/HW/description.ipynb)
 
-## 🛠️ Libraries Used
+## Libraries Used
 - `numpy`
 - `pandas`
 - `matplotlib`
