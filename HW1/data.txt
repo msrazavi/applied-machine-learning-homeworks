@@ -1,0 +1,11 @@
+COURSES
+TMUCE1,Applied Machine Learning,3
+TMUCE2,Reconfigurable Systems,4
+MAAREF,Islamic Revolution,2
+STUDENTS
+S404,Maryam Maryami,maryam@modares.ac.ir
+S403,Sadra Sadraei,sadra@modares.ac.ir
+GRADES,S404,TMUCE1,85.0,90.0,92.0
+GRADES,S404,TMUCE2,78.0,82.0
+GRADES,S403,MAAREF,95.0,98.0
+GRADES,S403,TMUCE1
