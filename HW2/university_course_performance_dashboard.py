@@ -149,7 +149,7 @@ plt.show()
 plt.figure(figsize=(10, 6))
 # Preparing data for boxplot
 plot_data = [df['Midterm'], df['Final'], df['Total_Score']]
-box = plt.boxplot(plot_data, patch_artist=True, labels=['Midterm', 'Final', 'Total'])
+box = plt.boxplot(plot_data, patch_artist=True, tick_labels=['Midterm', 'Final', 'Total'])
 
 colors = ['#377eb8', '#e41a1c', '#4daf4a']
 for patch, color in zip(box['boxes'], colors):
@@ -199,8 +199,7 @@ plt.show()
 # --- Plot 7: Stacked Bar Chart (Grade Distribution) ---
 grade_dist = pd.crosstab(df['Department'], df['Grade'])
 
-# Reorder columns to F, D, C, B, A (or A, B, C, D, F depending on preference)
-grade_dist = grade_dist[['B', 'C', 'D', 'F', 'A']] # Based on image supplied, A might be rare
+# grade_dist = grade_dist[['B', 'C', 'D', 'F', 'A']]
 # Let's ensure all grades are present in columns even if count is 0
 for g in labels:
     if g not in grade_dist.columns:
