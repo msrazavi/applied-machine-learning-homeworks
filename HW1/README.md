@@ -1,16 +1,21 @@
-# Student Grade Management System
+# HW1: Student Grade Management System
 
-A console-based application to manage students, courses, and grades.
+This project is part of the "Python Quick Review" module. The goal is to build a console-based application to demonstrate a grasp of core Python principles.
 
-## Features
-- **Student Management**: Add, update, view, and search for students.
-- **Course Management**: Create courses with credit values.
-- **Grade Management**: Enroll students, record numerical grades, and calculate GPA.
-- **File System**: Save/Load data to a text file and export reports to CSV.
+## 📖 Project Overview
+**Being Familiar with Python**
 
-## How to Run
-1. Ensure you have Python installed.
-2. Run the script:
-```bash
-   python grade_manager.py
-   
+In this assignment, I built a Student Grade Management System using procedural programming. This console-based app handles:
+- Student records management.
+- Course details tracking.
+- Grade computations.
+
+*Note: The project may also incorporate classes and is developed within a Python virtual environment to ensure dependency isolation.*
+
+## 🔗 Assignment Description
+You can view the original full assignment description and requirements provided by the professor here:
+> [**View Original Problem Statement (GitHub)**](https://github.com/hhomaei/aml/blob/main/Chapter-1-Python-Quick-Review/HW/description.ipynb)
+
+## 🛠️ Tech Stack
+- **Language:** Python 3.x
+- **Concepts:** Procedural Programming, Data Structures, Virtual Environments.

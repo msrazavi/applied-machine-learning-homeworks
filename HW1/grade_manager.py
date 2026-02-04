@@ -1,19 +1,18 @@
 import csv
 import os
+import re
 
-# ==========================================
 # UTILITY & HELPER FUNCTIONS
-# ==========================================
-
 def validate_email(email):
     """
-    Checks if email contains '@' and a '.' after the '@'.
+    Checks if email follows the format: user@domain.extension
+    using Regular Expressions.
     """
-    if "@" in email:
-        parts = email.split("@")
-        if len(parts) == 2 and "." in parts[1]:
-            return True
+    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    if re.match(pattern, email):
+        return True
     return False
+
 
 def validate_grade(grade):
     """
@@ -58,10 +57,7 @@ def display_menu():
     print("0. Exit")
     print("=======================================")
 
-# ==========================================
 # STUDENT MANAGEMENT FUNCTIONS
-# ==========================================
-
 def add_student(students, student_id, name, email):
     if student_id in students:
         print(f"Error: Student ID {student_id} already exists.")
@@ -114,10 +110,7 @@ def update_student(students, student_id, new_name, new_email):
             return
     print("Student information updated.")
 
-# ==========================================
 # COURSE MANAGEMENT FUNCTIONS
-# ==========================================
-
 def add_course(courses, course_code, course_name, credits):
     if course_code in courses:
         print("Error: Course code already exists.")
@@ -144,10 +137,7 @@ def get_course_credits(courses, course_code):
         return courses[course_code]['credits']
     return 0
 
-# ==========================================
 # GRADE MANAGEMENT FUNCTIONS
-# ==========================================
-
 def enroll_student(students, student_id, course_code):
     if student_id not in students:
         print("Student not found.")
@@ -212,10 +202,7 @@ def calculate_student_gpa(students, courses, student_id):
         
     return total_points / total_credits
 
-# ==========================================
 # FILE OPERATIONS FUNCTIONS
-# ==========================================
-
 def save_data_to_file(students, courses, filename):
     try:
         with open(filename, 'w') as file:
@@ -329,10 +316,7 @@ def export_grades_to_csv(students, courses, filename):
     except Exception as e:
         print(f"Error exporting CSV: {e}")
 
-# ==========================================
 # MAIN PROGRAM
-# ==========================================
-
 def main():
     # Initialize data structures
     students = {}
