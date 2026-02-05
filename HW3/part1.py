@@ -17,10 +17,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # 3. Implement Euclidean Distance and Manual KNN
 def euclidean_distance(point1, point2):
-    """
-    Calculates the Euclidean distance between two numpy arrays.
-    Formula: sqrt(sum((x - y)^2))
-    """
+    # Calculates the Euclidean distance between two numpy arrays.
+    # Formula: sqrt(sum((x - y)^2))
     return np.sqrt(np.sum((point1 - point2)**2))
 
 class ManualKNN:
@@ -30,9 +28,6 @@ class ManualKNN:
         self.y_train = None
 
     def fit(self, X, y):
-        """
-        KNN is a lazy learner. 'Fitting' just means storing the training data.
-        """
         self.X_train = X
         self.y_train = y
 
@@ -85,11 +80,11 @@ plt.figure(figsize=(9, 6))
 
 # Plot Manual KNN (Blue circles, larger)
 plt.plot(k_values, manual_accuracies, label='Manual KNN', 
-         marker='o', markersize=9, linestyle='--', color='#2b7bba')
+         marker='o', markersize=9, linestyle='--', color='blue')
 
 # Plot Sklearn KNN (Orange squares, smaller - to show overlap/difference)
 plt.plot(k_values, sklearn_accuracies, label='sklearn KNN', 
-         marker='s', markersize=5, linestyle=':', color='#eb8c23')
+         marker='s', markersize=5, linestyle=':', color='orange')
 
 plt.title('Breast Cancer dataset: Manual vs. sklearn KNN')
 plt.xlabel('k (Number of Neighbors)')

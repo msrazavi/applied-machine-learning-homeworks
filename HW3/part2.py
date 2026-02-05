@@ -27,10 +27,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # 3. Implement Hamming Distance and Manual KNN
 def hamming_distance(point1, point2):
-    """
-    Calculates the Hamming distance between two numpy arrays.
-    Distance = Number of positions where symbols differ.
-    """
+    # Calculates the Hamming distance between two numpy arrays.
+    # Distance = Number of positions where symbols differ.
     # Sum of elements where point1 is NOT equal to point2
     return np.sum(point1 != point2)
 
@@ -94,11 +92,11 @@ plt.figure(figsize=(9, 6))
 
 # Plot Manual KNN
 plt.plot(k_values, manual_accuracies, label='Manual KNN', 
-         marker='o', linestyle='--', color='#2b7bba')
+         marker='o', linestyle='--', color='blue')
 
 # Plot Sklearn KNN
 plt.plot(k_values, sklearn_accuracies, label='sklearn KNN', 
-         marker='s', linestyle=':', color='#eb8c23')
+         marker='s', linestyle=':', color='orange')
 
 plt.title('Car Evaluation dataset: Manual vs. sklearn KNN')
 plt.xlabel('k (Number of Neighbors)')

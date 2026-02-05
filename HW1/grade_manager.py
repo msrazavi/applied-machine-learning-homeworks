@@ -4,10 +4,7 @@ import re
 
 # UTILITY & HELPER FUNCTIONS
 def validate_email(email):
-    """
-    Checks if email follows the format: user@domain.extension
-    using Regular Expressions.
-    """
+    # Checks if email follows the format: user@domain.extension using Regular Expressions.
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
     if re.match(pattern, email):
         return True
@@ -15,9 +12,7 @@ def validate_email(email):
 
 
 def validate_grade(grade):
-    """
-    Checks if grade is a float between 0 and 100.
-    """
+    # Checks if grade is a float between 0 and 100.
     try:
         g = float(grade)
         if 0.0 <= g <= 100.0:
@@ -27,7 +22,7 @@ def validate_grade(grade):
     return False, None
 
 def convert_to_letter_grade(average):
-    """Converts numerical average to letter grade."""
+    # Converts numerical average to letter grade.
     if average >= 90: return 'A'
     elif average >= 80: return 'B'
     elif average >= 70: return 'C'
@@ -35,7 +30,7 @@ def convert_to_letter_grade(average):
     else: return 'F'
 
 def convert_to_grade_points(letter):
-    """Converts letter grade to GPA points."""
+    # Converts letter grade to GPA points.
     mapping = {'A': 4.0, 'B': 3.0, 'C': 2.0, 'D': 1.0, 'F': 0.0}
     return mapping.get(letter, 0.0)
 

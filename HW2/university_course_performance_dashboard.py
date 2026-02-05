@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Set random seed for reproducibility
-np.random.seed(42)
+# np.random.seed(42)
 
 # PART 1: Data Generation with NumPy
 print("Generating Data...")
@@ -14,7 +14,7 @@ num_students = 100
 # 1. Generate Midterm and Final scores (Normal distribution, clipped 0-100)
 # Mean=70, Std=15 is a reasonable assumption for grades
 midterm_scores = np.random.normal(70, 15, num_students)
-final_scores = np.random.normal(75, 12, num_students)
+final_scores = np.random.normal(70, 15, num_students)
 
 # Clip values to ensure they are within 0-100 range
 midterm_scores = np.clip(midterm_scores, 0, 100)
@@ -28,21 +28,16 @@ assignment_scores = assignment_scores.reshape(num_students, 5)
 # 3. Generate Departments
 departments = np.random.choice(['CS', 'EE', 'PHYS', 'CHEM', 'BIO'], num_students)
 
-# 4. Introduce Missing Values (NaNs) - 5%
+# 4. Introduce 5% Missing Values (NaNs)
 def inject_nans(array, percent=0.05):
     flat_arr = array.ravel() # Flatten to handle 1D and 2D arrays
     n = len(flat_arr)
     num_nans = int(n * percent)
     missing_indices = np.random.choice(n, size=num_nans, replace=False)
     
-    # We need to copy to avoid modifying original array type issues if integer
+    #copy to avoid modifying original array type issues if integer
     new_arr = flat_arr.astype(float) if array.dtype.kind != 'U' else flat_arr.astype(object)
-    
-    if array.dtype.kind != 'U': # If numeric
-        new_arr[missing_indices] = np.nan
-    else: # If string/object
-        new_arr[missing_indices] = np.nan
-        
+    new_arr[missing_indices] = np.nan
     return new_arr.reshape(array.shape)
 
 midterm_scores = inject_nans(midterm_scores)
@@ -116,20 +111,20 @@ dept_stats = df.groupby('Department').agg({
 
 # Rename columns for clarity in output
 dept_stats.columns = ['Total_Mean', 'Total_Std', 'Midterm_Mean', 'Final_Mean', 'Student_Count']
-print("\nDepartment Statistics:")
+print("Department Statistics:")
 print(dept_stats)
 
 # PART 4: Visualization with Matplotlib
 print("Generating Visualizations...")
 
 # Define a color map for departments to be consistent across plots
-dept_colors = {'CS': '#ff9999', 'EE': '#66b3ff', 'PHYS': '#99ff99', 'CHEM': '#ffcc99', 'BIO': '#c2c2f0'}
+dept_colors = {'CS': 'pink', 'EE': 'blue', 'PHYS': 'green', 'CHEM': 'orange', 'BIO': 'purple'}
 unique_depts = df['Department'].unique()
 
 # --- Plot 1: Bar Chart (Average Total Score by Dept) ---
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(10, 7))
 avg_scores = df.groupby('Department')['Total_Score'].mean()
-plt.bar(avg_scores.index, avg_scores.values, color=[dept_colors.get(x, '#333333') for x in avg_scores.index])
+plt.bar(avg_scores.index, avg_scores.values, color=[dept_colors.get(x, 'black') for x in avg_scores.index])
 plt.title('Average Total Score by Department')
 plt.xlabel('Department')
 plt.ylabel('Average Score')
@@ -137,7 +132,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 
 # --- Plot 2: Histogram of Total Scores ---
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(10, 7))
 plt.hist(df['Total_Score'], bins=15, color='skyblue', edgecolor='black')
 plt.title('Distribution of Total Scores')
 plt.xlabel('Total Score')
@@ -146,12 +141,12 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.show()
 
 # --- Plot 3: Boxplot (Midterm, Final, Total) ---
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 7))
 # Preparing data for boxplot
 plot_data = [df['Midterm'], df['Final'], df['Total_Score']]
 box = plt.boxplot(plot_data, patch_artist=True, tick_labels=['Midterm', 'Final', 'Total'])
 
-colors = ['#377eb8', '#e41a1c', '#4daf4a']
+colors = ['blue', 'red', 'green']
 for patch, color in zip(box['boxes'], colors):
     patch.set_facecolor(color)
     patch.set_alpha(0.8)
@@ -162,7 +157,7 @@ plt.grid(axis='y', linestyle='--', alpha=0.3)
 plt.show()
 
 # --- Plot 4: Scatter Plot (Midterm vs Final) ---
-plt.figure(figsize=(9, 6))
+plt.figure(figsize=(10, 7))
 for dept in unique_depts:
     subset = df[df['Department'] == dept]
     plt.scatter(subset['Midterm'], subset['Final'], 
@@ -176,7 +171,7 @@ plt.grid(True, linestyle='--', alpha=0.3)
 plt.show()
 
 # --- Plot 5: Pie Chart (Student Distribution) ---
-plt.figure(figsize=(7, 7))
+plt.figure(figsize=(10, 7))
 dept_counts = df['Department'].value_counts()
 plt.pie(dept_counts, labels=dept_counts.index, autopct='%1.1f%%', startangle=90, 
         colors=[dept_colors.get(x) for x in dept_counts.index])
@@ -184,7 +179,7 @@ plt.title('Student Distribution by Department')
 plt.show()
 
 # --- Plot 6: Heatmap of Correlation Matrix ---
-plt.figure(figsize=(10, 8))
+plt.figure(figsize=(10, 7))
 # Select only numeric columns for correlation
 numeric_df = df[['StudentID', 'Midterm', 'Final'] + assignment_cols + ['Total_Score']]
 corr_matrix = numeric_df.corr()
@@ -198,15 +193,12 @@ plt.show()
 
 # --- Plot 7: Stacked Bar Chart (Grade Distribution) ---
 grade_dist = pd.crosstab(df['Department'], df['Grade'])
-
-# grade_dist = grade_dist[['B', 'C', 'D', 'F', 'A']]
-# Let's ensure all grades are present in columns even if count is 0
 for g in labels:
     if g not in grade_dist.columns:
         grade_dist[g] = 0
-grade_dist = grade_dist[labels[::-1]] # A, B, C, D, F
+grade_dist = grade_dist[labels[::-1]]
 
-ax = grade_dist.plot(kind='bar', stacked=True, figsize=(10, 6), width=0.5)
+ax = grade_dist.plot(kind='bar', stacked=True, figsize=(10, 7), width=0.5)
 plt.title('Grade Distribution by Department')
 plt.xlabel('Department')
 plt.ylabel('Number of Students')
