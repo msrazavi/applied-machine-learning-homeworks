@@ -88,7 +88,7 @@ for k in k_values:
     print(f"{k:<5} | {manual_acc:.4f}       | {sklearn_acc:.4f}")
 
 # 5. Plotting Accuracy vs. K
-plt.figure(figsize=(9, 6))
+plt.figure(figsize=(10, 8))
 
 # Plot Manual KNN
 plt.plot(k_values, manual_accuracies, label='Manual KNN', 
